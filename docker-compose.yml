@@ -3,6 +3,8 @@ services:
   # Django web application
   web:
     container_name: django_app
+    environment:
+      - DATABASE_HOST=db
     build:
       context: .
       dockerfile: Dockerfile
