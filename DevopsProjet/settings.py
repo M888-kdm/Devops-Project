@@ -25,7 +25,7 @@ SECRET_KEY = "django-insecure-n7oyz^g4gji6vioo#j-#2%*-cij+p_k(w7me+(%oocrnh(ay)a
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -40,7 +40,6 @@ INSTALLED_APPS = [
 
     # my apps
     'formulaire',
-
 
 ]
 
@@ -79,12 +78,13 @@ WSGI_APPLICATION = "DevopsProjet.wsgi.application"
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
 DATABASES = {
-    "default": {
-        "ENGINE": "django.db.backends.postgresql",
-        "NAME": 'formulaire',
-        "USERNAME":'damedjango',
-        "PASSWORD":"psql",
-
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'database',          
+        'USER': 'postgres',              
+        'PASSWORD': 'password',      
+        'HOST': 'db',            
+        'PORT': '5432',                
     }
 }
 
