@@ -1,7 +1,6 @@
 from django.test import TestCase,Client
 from django.urls import reverse
 from .models import Utilisateur
-from .views import visit_count
 
 # Create your tests here.
 class UserListViewTest(TestCase):
@@ -32,16 +31,34 @@ class UserListViewTest(TestCase):
 
 
 # Unit test for visit_count
+class GetVisitCountTestCase(TestCase):
+    def setUp(self):
+        self.client = Client()
 
+    def test_get_visit_count(self):
+        # Perform a GET request to the 'get_visit_count' view
+        url = reverse('formulaire:visit_count')
+        response = self.client.get(url)
 
-class VisitCountTestCase(TestCase):
-    def test_visit_count(self):
-        # Create a new client to simulate HTTP requests
-        client = Client()
-
-        # Send a GET request to the visit_count endpoint
-        response = client.get(reverse('formulaire:visit_count'))
-
-        # Check that the response contains the correct count
+        # Check if the view returns an HTTP 200 response
         self.assertEqual(response.status_code, 200)
-        self.assertIn(b'This website has been visited', response.content)
+
+        # Check if the 'visit_count_users' and 'visit_count_index' variables increment correctly
+        initial_users_count = response.context['visit_count_users']
+        initial_index_count = response.context['visit_count_index']
+
+        # Access the 'user_list' URL (not 'users')
+        user_list_url = reverse('formulaire:user_list')
+        self.client.get(user_list_url)
+
+        # Access the '' (empty) URL
+        empty_url = reverse('formulaire:index')
+        self.client.get(empty_url)
+
+
+        # Perform another GET request to the 'get_visit_count' view
+        response = self.client.get(url)
+
+        # Verify that 'visit_count_users' and 'visit_count_index' have incremented by 1
+        self.assertEqual(response.context['visit_count_users'], initial_users_count + 1)
+        self.assertEqual(response.context['visit_count_index'], initial_index_count + 1)
