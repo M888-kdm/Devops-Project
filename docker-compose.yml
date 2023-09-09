@@ -1,16 +1,5 @@
 version: '3'
 services:
-  # Django web application
-  web:
-    container_name: django_app
-    environment:
-      - DATABASE_HOST=db
-    build:
-      context: .
-      dockerfile: Dockerfile
-    ports:
-      - 8000:8000
-
   # Postgres database
   db:
     image: postgres:latest
@@ -21,3 +10,15 @@ services:
       - POSTGRES_DB=database
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=password
+  # Django web application
+  web:
+    depends_on:
+      - db
+    container_name: django_app
+    environment:
+      - DATABASE_HOST=db
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - 8000:8000

@@ -16,10 +16,10 @@ COPY . /app/
 
 # Install any needed packages specified in requirements.txt
 RUN pip install --no-cache-dir -r requirements.txt
-RUN python manage.py migrate
+RUN chmod +x /app/script.sh
 
 # Expose port 8000 for the Django development server
 EXPOSE 8000
 
 # Start the Django development server
-CMD ["python", "manage.py", "runserver", "0.0.0.0:8000"]
+CMD ["./script.sh"]
