@@ -1,17 +1,16 @@
-#name of the workflow
-name: CI/CD PIPELINE django
+name: CI/CD PIPELINE
 
 # Déclenchez le workflow chaque fois qu'une modification est poussée vers la branche principale ou qu'une demande d'extraction est ouverte.
 on: 
-
   push:
     branches:  main
-
   pull_request:
     branches: main
+    
 #action à executer
 jobs:
   build-ci:
+    name: Build and Test
     runs-on:  ubuntu-latest 
     container: python:3.11.4-bullseye
     steps:
