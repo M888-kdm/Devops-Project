@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 
 from pathlib import Path
+import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -25,7 +26,7 @@ SECRET_KEY = "django-insecure-n7oyz^g4gji6vioo#j-#2%*-cij+p_k(w7me+(%oocrnh(ay)a
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -40,7 +41,6 @@ INSTALLED_APPS = [
 
     # my apps
     'formulaire',
-
 
 ]
 
@@ -79,12 +79,13 @@ WSGI_APPLICATION = "DevopsProjet.wsgi.application"
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
 DATABASES = {
-    "default": {
-        "ENGINE": "django.db.backends.postgresql",
-        "NAME": 'formulaire',
-        "USERNAME":'damedjango',
-        "PASSWORD":"psql",
-
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'database',          
+        'USER': 'postgres',              
+        'PASSWORD': 'password',      
+        'HOST': os.environ.get('DATABASE_HOST', 'db'),            
+        'PORT': '5432',                
     }
 }
 
