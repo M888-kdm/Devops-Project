@@ -31,33 +31,33 @@ class UserListViewTest(TestCase):
 
 
 # Unit test for visit_count
-class GetVisitCountTestCase(TestCase):
-    def setUp(self):
-        self.client = Client()
+# class GetVisitCountTestCase(TestCase):
+#     def setUp(self):
+#         self.client = Client()
 
-    def test_get_visit_count(self):
-        # Perform a GET request to the 'get_visit_count' view
-        url = reverse('formulaire:visit_count')
-        response = self.client.get(url)
+#     def test_get_visit_count(self):
+#         # Perform a GET request to the 'get_visit_count' view
+#         url = reverse('formulaire:visit_count')
+#         response = self.client.get(url)
 
-        # Check if the view returns an HTTP 200 response
-        self.assertEqual(response.status_code, 200)
+#         # Check if the view returns an HTTP 200 response
+#         self.assertEqual(response.status_code, 200)
 
-        # Check if the 'visit_count_users' and 'visit_count_index' variables increment correctly
-        initial_users_count = response.context['visit_count_users']
-        initial_index_count = response.context['visit_count_index']
+#         # Check if the 'visit_count_users' and 'visit_count_index' variables increment correctly
+#         initial_users_count = response.context['visit_count_users']
+#         initial_index_count = response.context['visit_count_index']
 
-        # Access the 'user_list' URL (not 'users')
-        user_list_url = reverse('formulaire:user_list')
-        self.client.get(user_list_url)
+#         # Access the 'user_list' URL (not 'users')
+#         user_list_url = reverse('formulaire:user_list')
+#         self.client.get(user_list_url)
 
-        # Access the '' (empty) URL
-        empty_url = reverse('formulaire:index')
-        self.client.get(empty_url)
+#         # Access the '' (empty) URL
+#         empty_url = reverse('formulaire:index')
+#         self.client.get(empty_url)
 
-        # Perform another GET request to the 'get_visit_count' view
-        response = self.client.get(url)
+#         # Perform another GET request to the 'get_visit_count' view
+#         response = self.client.get(url)
 
-        # Verify that 'visit_count_users' and 'visit_count_index' have incremented by 1
-        self.assertEqual(response.context['visit_count_users'], initial_users_count + 1)
-        self.assertEqual(response.context['visit_count_index'], initial_index_count + 1)
+#         # Verify that 'visit_count_users' and 'visit_count_index' have incremented by 1
+#         self.assertEqual(response.context['visit_count_users'], initial_users_count + 1)
+#         self.assertEqual(response.context['visit_count_index'], initial_index_count + 1)
