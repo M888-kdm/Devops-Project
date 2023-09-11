@@ -14,6 +14,7 @@ def user_list(request):
         visits = 1
     else:
         visits += 1
+    cache.set('visits', visits, timeout=3600)
     # Get all users from database
     users = Utilisateur.objects.all()
     return render(request, 'formulaire/user_list.html', {'users': users })

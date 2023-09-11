@@ -20,3 +20,5 @@ spec:
         env:
         - name: DATABASE_HOST
           value: postgres-service.default.svc.cluster.local
+        - name: REDIS_HOST
+          value: redis-service.default.svc.cluster.local

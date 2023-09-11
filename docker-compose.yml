@@ -14,6 +14,7 @@ services:
   web:
     depends_on:
       - db
+      - redis
     container_name: django_app
     environment:
       - DATABASE_HOST=db
@@ -23,6 +24,7 @@ services:
     ports:
       - 8000:8000
   redis:
+    container_name: redis
     image: redis:latest
     ports:
       - 6379:6379
