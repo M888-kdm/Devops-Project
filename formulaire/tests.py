@@ -55,7 +55,6 @@ class GetVisitCountTestCase(TestCase):
         empty_url = reverse('formulaire:index')
         self.client.get(empty_url)
 
-
         # Perform another GET request to the 'get_visit_count' view
         response = self.client.get(url)
 

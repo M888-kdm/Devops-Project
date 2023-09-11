@@ -8,6 +8,15 @@ on:
       - main
 
 jobs:
+  services:
+      postgres:
+        image: postgres
+        env:
+          POSTGRES_DB: database  # Change to your database name
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: password
+        ports:
+          - 5432:5432
   build:
     name: Continuous Integration
     runs-on: ubuntu-latest
