@@ -1,6 +1,7 @@
 from django.test import TestCase, Client
 from django.urls import reverse
 from .models import Utilisateur
+from django.core.cache import cache
 
 # Create your tests here.
 class UserListViewTest(TestCase):
@@ -31,33 +32,28 @@ class UserListViewTest(TestCase):
 
 
 # Unit test for visit_count
-# class GetVisitCountTestCase(TestCase):
-#     def setUp(self):
-#         self.client = Client()
+class GetVisitCountTestCase(TestCase):
+    def test_get_visit_count_view(self):
+        # Simulate a visit count in the cache
+        cache.set('visits', 42)
 
-#     def test_get_visit_count(self):
-#         # Perform a GET request to the 'get_visit_count' view
-#         url = reverse('formulaire:visit_count')
-#         response = self.client.get(url)
+        # Test if the get_visit_count view returns a 200 status code
+        response = self.client.get(reverse("formulaire:visit_count"))
+        self.assertEqual(response.status_code, 200)
 
-#         # Check if the view returns an HTTP 200 response
-#         self.assertEqual(response.status_code, 200)
+    def test_get_visit_count_view_context(self):
+        # Simulate no visits in the cache
+        cache.delete('visits')
 
-#         # Check if the 'visit_count_users' and 'visit_count_index' variables increment correctly
-#         initial_users_count = response.context['visit_count_users']
-#         initial_index_count = response.context['visit_count_index']
+        # Test if the get_visit_count view contains visit count data in the context
+        response = self.client.get(reverse("formulaire:visit_count"))
+        visits = response.context["visits"]
+        self.assertIsNone(visits)  # Check if visits context variable is None when no visits are cached
 
-#         # Access the 'user_list' URL (not 'users')
-#         user_list_url = reverse('formulaire:user_list')
-#         self.client.get(user_list_url)
+    def test_get_visit_count_view_template(self):
+        # Simulate a visit count in the cache
+        cache.set('visits', 42)
 
-#         # Access the '' (empty) URL
-#         empty_url = reverse('formulaire:index')
-#         self.client.get(empty_url)
-
-#         # Perform another GET request to the 'get_visit_count' view
-#         response = self.client.get(url)
-
-#         # Verify that 'visit_count_users' and 'visit_count_index' have incremented by 1
-#         self.assertEqual(response.context['visit_count_users'], initial_users_count + 1)
-#         self.assertEqual(response.context['visit_count_index'], initial_index_count + 1)
+        # Test if the get_visit_count view uses the correct template
+        response = self.client.get(reverse("formulaire:visit_count"))
+        self.assertTemplateUsed(response, "formulaire/visit_count.html")
