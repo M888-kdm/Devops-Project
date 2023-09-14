@@ -16,6 +16,8 @@ services:
       - db
       - redis
     container_name: django_app
+    volumes:
+      - ./formulaire:/app/formulaire
     environment:
       - DATABASE_HOST=db
     build:

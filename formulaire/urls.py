@@ -4,7 +4,7 @@ from . import views
 app_name="formulaire"
 
 urlpatterns=[
-    path('',views.user_list, name="index"),
+    path('', views.user_list, name="index"),
     path('users/', views.user_list, name='user_list'),
     path('visit_count/', views.get_visit_count, name='visit_count'),
 ]
