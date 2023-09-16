@@ -9,23 +9,19 @@ The main of this project is to develop a simple Django application that is deplo
 To run the django app first clone the repository with `git clone https://github.com/M888-kdm/devopsProjetClasse.git` on your terminal.
 Then go on your IDE terminal on the clone project directory then to build the project run `docker-compose build `:
 
-<img width="1680" alt="Screenshot 2023-09-16 at 13 43 05" src="https://github.com/M888-kdm/devopsProjetClasse/assets/108241621/79c55535-79d8-46df-b936-33dfcb576fb5">
+<img width="1680" alt="Screenshot 2023-09-16 at 13 43 05" src="https://github.com/M888-kdm/devopsProjetClasse/assets/108241621/82677158-0866-4892-997c-5d8fd2dcb1ab">
 
 Then run the `docker-compose up -d ` to start containers:
 
 <img width="1680" alt="Screenshot 2023-09-16 at 13 43 37" src="https://github.com/M888-kdm/devopsProjetClasse/assets/108241621/e41b6860-e89d-48d2-82ad-ca0bcc219250">
-
-To start the app go on your web browser on the url : `localhost:8000`
-
-
-<img width="1680" alt="Screenshot 2023-09-16 at 14 24 21" src="https://github.com/M888-kdm/devopsProjetClasse/assets/108241621/9780fa7e-6aa1-45b3-9c16-8011b756b8fc">
 
  ## 1-2 Deep dive into django app :
  We have 2 endpoints : 
 ### The first endpoint (`localhost:8000/users` on the web browser)
 It returns the list of users in the databases (username, email, first name and last name) : 
  
- <img width="1680" alt="Screenshot 2023-09-16 at 13 24 20" src="https://github.com/M888-kdm/devopsProjetClasse/assets/108241621/a35642f2-d974-4d5b-ab42-ebbcb9e2d4a6">
+<img width="1658" alt="Screenshot 2023-09-16 at 16 32 27" src="https://github.com/M888-kdm/devopsProjetClasse/assets/108241621/76d419a7-270a-4d24-8b3e-3b80bddab215">
+
 
  To go into details in the implementation, this is the views.py where i will explain the function behind each endpoint.
  About the view function of  the `local:8000/users` endpoint :
@@ -66,11 +62,14 @@ What we do above is break down as follow:
 ### The second endpoint `localhost:8000/visit_count`:
 It check count the number of visits of the website.
 A glance is presented below: 
+<img width="1680" alt="Screenshot 2023-09-16 at 16 33 10" src="https://github.com/M888-kdm/devopsProjetClasse/assets/108241621/c54c4780-e212-48b8-9fbb-456f8adccd66">
 
-<img width="1680" alt="Screenshot 2023-09-16 at 13 24 41" src="https://github.com/M888-kdm/devopsProjetClasse/assets/108241621/55396b46-695a-4955-97f0-b1b0cbb01050">
+
 
 About the view function :
+
 <img width="660" alt="Screenshot 2023-09-16 at 14 36 04" src="https://github.com/M888-kdm/devopsProjetClasse/assets/108241621/69e19f85-89c1-4a35-914b-78b54e050ed7">
+
 Here is the keys of this function:
 
 `def get_visit_count(request)`: This defines the view function and takes a request object as a parameter, which represents an HTTP request made to this view.
@@ -121,7 +120,8 @@ This screen below is self-explanatory
 
 Our application uses a Postgres database and Redis to store the cache so we write containers as services as the facility is provided by `docker-compose.yml`:
 
-<img width="530" alt="Screenshot 2023-09-16 at 15 45 37" src="https://github.com/M888-kdm/devopsProjetClasse/assets/108241621/46813a7e-6e9c-4c20-b511-6dc62ecf59ad">
+<img width="530" alt="Screenshot 2023-09-16 at 16 27 00" src="https://github.com/M888-kdm/devopsProjetClasse/assets/108241621/15fa4f7e-068d-4487-accd-0ba41d3372b4">
+
 
 
  
